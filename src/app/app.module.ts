@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -12,11 +12,15 @@ import {ROUTES} from './app.routes';
 
 // Services
 import { HeroesService } from "./services/heroes.service";
+
+//Pipes
+import { KeysPipe } from './pipes/keys.pipe';
 @NgModule({
     declarations: [
         AppComponent,
         HeroesComponent,
-        HeroeComponent
+        HeroeComponent,
+        KeysPipe
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HeroesService } from '../../services/heroes.service';
+import { Heroe } from '../../interfaces/heroe.interface';
 
 @Component({
   selector: 'app-heroes',
@@ -7,10 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class HeroesComponent implements OnInit {
+  heroes:Heroe;
+  loading: boolean = true;
 
-  constructor() { }
+  constructor( private _heroesService:HeroesService) {
+    this._heroesService.getHeroes()
+        .subscribe( heroes =>{
+          this.heroes = heroes;
+          this.loading = false;
+        })
+  }
 
   ngOnInit() {
   }
 
+  borrarHeroe( key$: string){
+    this._heroesService.borrarHeroe(key$)
+        .subscribe( data=>{
+          if(data){
+            console.error(data);
+          }else{
+            delete this.heroes[key$];
+          }
+        })
+  }
 }

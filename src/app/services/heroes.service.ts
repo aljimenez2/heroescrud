@@ -39,7 +39,29 @@ export class HeroesService {
   }
 
   getHeroe( key$:string ){
-      let url = `${ this.heroeURL }/${key$}.json`;
-      return this.https.get( url )
+      let url = `${ this.firebaseHeroeUrl }/${key$}.json`;
+      return this.http.get(url).pipe(
+          map(res => {
+              return res;
+          })
+      )
   }
+
+    getHeroes( ){
+        return this.http.get(this.firebaseUrl).pipe(
+            map(res => {
+                return res;
+            })
+        )
+    }
+
+    borrarHeroe( key$: string){
+        let url = `${ this.firebaseHeroeUrl}/${key$}.json`;
+        return this.http.delete(url).pipe(
+            map(res => {
+                return res
+                }
+            )
+        )
+    }
 }
